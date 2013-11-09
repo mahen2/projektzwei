@@ -37,10 +37,10 @@ jahre1_list = []
 for d in date_list1:
     tage1[d.weekday()]=''
     
-    monate1[d.strftime("%m")]=''
+    monate1[d.strftime("%Y-%m")]=''
     jahre1[d.strftime("%Y")]=''
     tage1_list.append(d.weekday())
-    monate1_list.append(d.strftime("%m"))
+    monate1_list.append(d.strftime("%Y-%m"))
     jahre1_list.append(d.strftime("%Y"))
         
 
