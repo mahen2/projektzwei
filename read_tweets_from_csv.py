@@ -29,12 +29,13 @@ def analyse_tweets(csv_file):
             print feld
             if feldindex == 2: # das zweite feld in der csv enthält das datum
                 date_list1.append(datetime.strptime(feld, date_format)) # liste mit datetime-objekten
-            if feldindex == 3:
+            if feldindex == 3: # das dritte feld enthaelt den text (das vierte uebrigens den client)
                 for hashtag in feld.split():
                     if hashtag.startswith("#"):
                         hashtag_list1.append(hashtag)
         print "\n"
 
+    # definiere jeweils ein dictionary und eine liste fuer jede angabe:
     tage1 = {}
     monate1 = {}
     jahre1 = {}
@@ -44,25 +45,25 @@ def analyse_tweets(csv_file):
 
     print "\n\n--- Datumsanalyse der Tweets  ---\n\n"
 
-    for d in date_list1:
+    for d in date_list1: # gehe alle datetime-objekte durch
         tage1[d.weekday()]=''
     
-        monate1[d.strftime("%Y-%m")]=''
-        jahre1[d.strftime("%Y")]=''
-        tage1_list.append(d.weekday())
-        monate1_list.append(d.strftime("%Y-%m"))
-        jahre1_list.append(d.strftime("%Y"))
+        monate1[d.strftime("%Y-%m")]='' # dictionary mit monaten (wird evtl mehrmals auf einen leeren string gesetzt, aber das ist egal)
+        jahre1[d.strftime("%Y")]='' #dictionary mit jahren
+        tage1_list.append(d.weekday()) # fuege tage zur liste hinzu
+        monate1_list.append(d.strftime("%Y-%m")) # fuege monate zur liste hinzu
+        jahre1_list.append(d.strftime("%Y")) #fuege jahre zur liste hinzu
         
 
 
     for j in jahre1:
-        jahre1[j] = jahre1_list.count(j)
+        jahre1[j] = jahre1_list.count(j) # fuege fuer jedes jahr die anzahl hinzu, wie oft das jahr vorkommt (die jahresliste wird gezaehlt)
 
     for m in monate1:
-        monate1[m] = monate1_list.count(m)
+        monate1[m] = monate1_list.count(m) # vgl jahre
     
     for t in tage1:
-        tage1[t] = tage1_list.count(t)
+        tage1[t] = tage1_list.count(t) vgl jahre
     
     print "\n"
 
@@ -94,7 +95,7 @@ def analyse_tweets(csv_file):
 
     hashtag1 = {}
     for hashtag in hashtag_list1:
-        hashtag1[hashtag] = hashtag_list1.count(hashtag)
+        hashtag1[hashtag] = hashtag_list1.count(hashtag) # aehnlich wie bei den datumsangaben: zaehle auftreten in der liste und speicher wert in dict
 
 
     hashtag1_sorted = sorted(hashtag1.iteritems(), key=operator.itemgetter(1))
@@ -106,7 +107,7 @@ def analyse_tweets(csv_file):
         if tup[1]>10:
             print tup[0] + ": " + str(tup[1]) + " mal"
     
-    return(hashtag1_sorted, jahre1, monate1, tage1)
+    return(hashtag1_sorted, jahre1, monate1, tage1) # return alle 4 dicts
 
 if __name__ == "__main__":
 
