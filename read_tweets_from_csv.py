@@ -2,7 +2,7 @@
 # encoding: utf-8
 # sort dictionary quelle: http://stackoverflow.com/questions/613183/python-sort-a-dictionary-by-value
 
-import csv, operator
+import csv, operator, stopwords
 
 from datetime import datetime
 
@@ -36,12 +36,13 @@ def analyse_tweets(csv_file):
                 date_list1.append(datetime.strptime(feld, date_format)) # liste mit datetime-objekten
             if feldindex == 3: # das dritte feld enthält den text (das vierte übrigens den client)
                 for wort in feld.split():
-                    if wort.startswith("#"):
-                        hashtag_list1.append(wort.lower())
-                    elif wort.startswith("@"):
-                        mentions_list1.append(wort.lower())
-                    else:
-                        woerter_list1.append(wort.lower())
+                    if wort.lower() not in stopwords.stopwords_liste:
+                        if wort.startswith("#"):
+                            hashtag_list1.append(wort.lower())
+                        elif wort.startswith("@"):
+                            mentions_list1.append(wort.lower())
+                        else:
+                            woerter_list1.append(wort.lower())
             if feldindex == 4:
                 client_list1.append(feld)
                 
