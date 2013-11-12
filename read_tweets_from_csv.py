@@ -154,7 +154,7 @@ def analyse_tweets(csv_file):
         if client[1]>0:
             print client[0] + ": " + str(client[1]) + " mal"
     
-    return(hashtag1_sorted, mentions1_sorted, woerter1_sorted, jahre1, monate1, tage1) # return alle 4 dicts
+    return(hashtag1_sorted, mentions1_sorted, clients1_sorted, woerter1_sorted, jahre1, monate1, tage1) # return alle 4 dicts
 
 if __name__ == "__main__":
 
