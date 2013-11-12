@@ -19,8 +19,13 @@ def analyse_tweets(csv_file):
             all_tweets.append(row) #zweidimensionale liste
     
     date_format = "%Y-%m-%d %H:%M:%S"
-    date_list1 = []
-    hashtag_list1 = []
+    
+    date_list1     = []
+    hashtag_list1  = []
+    woerter_list1  = []
+    mentions_list1 = []
+    client_list1   = []
+    
 
     for tweetlist in all_tweets:
         feldindex=0
@@ -30,9 +35,16 @@ def analyse_tweets(csv_file):
             if feldindex == 2: # das zweite feld in der csv enthält das datum
                 date_list1.append(datetime.strptime(feld, date_format)) # liste mit datetime-objekten
             if feldindex == 3: # das dritte feld enthält den text (das vierte übrigens den client)
-                for hashtag in feld.split():
-                    if hashtag.startswith("#"):
-                        hashtag_list1.append(hashtag)
+                for wort in feld.split():
+                    if wort.startswith("#"):
+                        hashtag_list1.append(wort.lower())
+                    elif wort.startswith("@"):
+                        mentions_list1.append(wort.lower())
+                    else:
+                        woerter_list1.append(wort.lower())
+            if feldindex == 4:
+                client_list1.append(feld)
+                
         print "\n"
 
     # definiere jeweils ein dictionary und eine liste für jede angabe:
@@ -96,18 +108,52 @@ def analyse_tweets(csv_file):
     hashtag1 = {}
     for hashtag in hashtag_list1:
         hashtag1[hashtag] = hashtag_list1.count(hashtag) # ähnlich wie bei den datumsangaben: zähle auftreten in der liste und speicher wert in dict
-
-
+    
+    woerter1 = {}
+    for wort in woerter_list1:
+        woerter1[wort] = woerter_list1.count(wort)
+        
+    
+    mentions1 = {}
+    for mention in mentions_list1:
+        mentions1[mention] = mentions_list1.count(mention)
+        
+    clients1 = {}
+    for client in client_list1:
+        clients1[client] = client_list1.count(client)
+    
+    woerter1_sorted = sorted(woerter1.iteritems(), key=operator.itemgetter(1))
     hashtag1_sorted = sorted(hashtag1.iteritems(), key=operator.itemgetter(1))
-
+    mentions1_sorted = sorted(mentions1.iteritems(), key=operator.itemgetter(1))
+    clients1_sorted = sorted(clients1.iteritems(), key=operator.itemgetter(1))
     print "\n\n--- Hashtaganalyse der Tweets (Schwelle: mindestens 10 mal verwendet)  ---\n\n"
 
 
     for tup in hashtag1_sorted:
-        if tup[1]>10:
+        if tup[1]>3:
             print tup[0] + ": " + str(tup[1]) + " mal"
     
-    return(hashtag1_sorted, jahre1, monate1, tage1) # return alle 4 dicts
+    print "\n\n--- Wörteranalyse der Tweets (Schwelle: mindestens 10 mal verwendet)  ---\n\n"
+    
+            
+    for wor in woerter1_sorted:
+        if wor[1]>10:
+            print wor[0] + ": " + str(wor[1]) + " mal"
+            
+            
+    print "\n\n--- Mentionsanalyse der Tweets (Schwelle: mindestens 10 mal verwendet)  ---\n\n"
+    
+    for mention in mentions1_sorted:
+        if mention[1]>10:
+            print mention[0] + ": " + str(mention[1]) + " mal"
+            
+    print "\n\n--- Clientanalyse der Tweets (Schwelle: mindestens 10 mal verwendet)  ---\n\n"
+
+    for client in clients1_sorted:
+        if client[1]>0:
+            print client[0] + ": " + str(client[1]) + " mal"
+    
+    return(hashtag1_sorted, mentions1_sorted, woerter1_sorted, jahre1, monate1, tage1) # return alle 4 dicts
 
 if __name__ == "__main__":
 
