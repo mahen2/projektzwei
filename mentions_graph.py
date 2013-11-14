@@ -16,7 +16,7 @@ N = 10
 
 h_values = []
 h_keys = []
-for key, value in woerter1_sorted:
+for key, value in mentions1_sorted:
     h_values.append(value)
     h_keys.append(key)
 
@@ -33,7 +33,7 @@ plt.subplots_adjust(top=0.85, bottom=0.27)
 # add some
 plt.xticks(rotation=50)
 ax.set_ylabel('Anzahl')
-ax.set_title(u"Top 10 Wörter für " + username)
+ax.set_title(u"Top 10 Mentions für " + username)
 ax.set_xticks(ind+width-0.5)
 ax.set_xticklabels( h_keys[-10:] )
 

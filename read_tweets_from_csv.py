@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 # encoding: utf-8
 # sort dictionary quelle: http://stackoverflow.com/questions/613183/python-sort-a-dictionary-by-value
+# remove punctuation: http://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string-in-python
 
-import csv, operator, stopwords
+import csv, operator, stopwords, unicodedata, string
 
 from datetime import datetime
+
+exclude = "?!-.,;" # satzzeichen die weggefiltert werden sollen
+table = string.maketrans("","")
 
 if __name__ == "__main__":
     csv_file = raw_input("Welche Datei soll geöffnet werden?\nDateiname: ")
@@ -38,11 +42,13 @@ def analyse_tweets(csv_file):
                 for wort in feld.split():
                     if wort.lower() not in stopwords.stopwords_liste:
                         if wort.startswith("#"):
-                            hashtag_list1.append(wort.lower())
+                            hashtag_list1.append(wort.lower().translate(table, exclude))
                         elif wort.startswith("@"):
-                            mentions_list1.append(wort.lower())
+                            if(wort.endswith(":")):
+                                wort = wort[:-1] # viele mentions hören mit nem doppelpunkt auf, deshalb entfernen
+                            mentions_list1.append(wort.lower().translate(table, exclude))
                         else:
-                            woerter_list1.append(wort.lower())
+                            woerter_list1.append(wort.lower().translate(table, exclude))
             if feldindex == 4:
                 client_list1.append(feld)
                 

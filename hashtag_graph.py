@@ -9,6 +9,7 @@ import read_tweets_from_csv
 datei = raw_input("Dateinamen angeben: ")
 
 (hashtag1_sorted, mentions1_sorted, clients1_sorted, woerter1_sorted, jahre1, monate1, tage1) = read_tweets_from_csv.analyse_tweets(datei)
+username = datei.split("_tweets.csv")[0]
 
 
 N = 10 
@@ -32,7 +33,7 @@ plt.subplots_adjust(top=0.85, bottom=0.27)
 # add some
 plt.xticks(rotation=50)
 ax.set_ylabel('Anzahl')
-ax.set_title('Top 10 Hashtags')
+ax.set_title(u"Top 10 Hashtags für " + username)
 ax.set_xticks(ind+width-0.5)
 ax.set_xticklabels( h_keys[-10:] )
 

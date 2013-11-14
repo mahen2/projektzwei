@@ -11,17 +11,19 @@ datei = raw_input("Dateinamen angeben: ")
 (hashtag1_sorted, mentions1_sorted, clients1_sorted, woerter1_sorted, jahre1, monate1, tage1) = read_tweets_from_csv.analyse_tweets(datei)
 username = datei.split("_tweets.csv")[0]
 
-
-N = 10 
+if (len(clients1_sorted)>=10): # überprüfung notwendig, manche benutzen nicht 10 verschiedene clients sondern vllt weniger
+    N = 10 
+else:
+    N = len(clients1_sorted)
 
 h_values = []
 h_keys = []
-for key, value in woerter1_sorted:
+for key, value in clients1_sorted:
     h_values.append(value)
     h_keys.append(key)
 
 
-menMeans = h_values[-10:]
+menMeans = h_values[-N:]
 
 ind = np.arange(N)  # the x locations for the groups
 width = 0.5       # the width of the bars
@@ -33,9 +35,9 @@ plt.subplots_adjust(top=0.85, bottom=0.27)
 # add some
 plt.xticks(rotation=50)
 ax.set_ylabel('Anzahl')
-ax.set_title(u"Top 10 Wörter für " + username)
+ax.set_title(u"Top "+ str(N) +u" Clients für " + username)
 ax.set_xticks(ind+width-0.5)
-ax.set_xticklabels( h_keys[-10:] )
+ax.set_xticklabels( h_keys[-N:] )
 
 
 def autolabel(rects):
