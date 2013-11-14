@@ -15,7 +15,7 @@ N = 10
 
 h_values = []
 h_keys = []
-for key, value in hashtag1_sorted:
+for key, value in woerter1_sorted:
     h_values.append(value)
     h_keys.append(key)
 

@@ -108,20 +108,20 @@ def analyse_tweets(csv_file):
 
     hashtag1 = {}
     for hashtag in hashtag_list1:
-        hashtag1[hashtag] = hashtag_list1.count(hashtag) # ähnlich wie bei den datumsangaben: zähle auftreten in der liste und speicher wert in dict
+        hashtag1[unicode(hashtag, "utf-8")] = hashtag_list1.count(hashtag) # ähnlich wie bei den datumsangaben: zähle auftreten in der liste und speicher wert in dict
     
     woerter1 = {}
     for wort in woerter_list1:
-        woerter1[wort] = woerter_list1.count(wort)
+        woerter1[unicode(wort, "utf-8")] = woerter_list1.count(wort)
         
     
     mentions1 = {}
     for mention in mentions_list1:
-        mentions1[mention] = mentions_list1.count(mention)
+        mentions1[unicode(mention, "utf8")] = mentions_list1.count(mention)
         
     clients1 = {}
     for client in client_list1:
-        clients1[client] = client_list1.count(client)
+        clients1[unicode(client, "utf8")] = client_list1.count(client)
     
     woerter1_sorted = sorted(woerter1.iteritems(), key=operator.itemgetter(1))
     hashtag1_sorted = sorted(hashtag1.iteritems(), key=operator.itemgetter(1))
