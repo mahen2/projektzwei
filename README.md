@@ -21,7 +21,7 @@ Das zweite Projekt für das Projektseminar Informetrie in Python.
 
 
 + Balken für Tweets pro Monat als Vergleich für beide Accounts 
-+ Kreisdiagramm für die Wochentage
++ Kreisdiagramm für die Wochentage OK
 + Säulen für Hashtags OK
 
 ### Dokumentation (Sphinx, siehe Aufgabenstellung)
