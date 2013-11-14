@@ -131,7 +131,7 @@ def analyse_tweets(csv_file):
 
 
     for tup in hashtag1_sorted:
-        if tup[1]>3:
+        if tup[1]>10:
             print tup[0] + ": " + str(tup[1]) + " mal"
     
     print "\n\n--- Wörteranalyse der Tweets (Schwelle: mindestens 10 mal verwendet)  ---\n\n"
