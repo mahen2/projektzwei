@@ -1,28 +1,32 @@
 projektzwei
 ===========
 
-Das zweite Projekt für das Projektseminar Python.
+Das zweite Projekt für das Projektseminar Informetrie in Python.
 
-TO DO:
-=====
+### Auslesen
++ Zwei Twitter Accounts mit mind. 3200 Tweets auswählen (gleicher Bereich) OK
++ Zugriff auf Twitter-API mit Hilfe von tweepy OK
++ Gesammelte Tweets in geeigneter Struktur speichern OK
++ Export in externe Datei OK
 
-Zwei Twitter Accounts mit mind. 3200 Tweets auswählen (gleicher Bereich)
-Zugriff auf Twitter-API mit Hilfe von tweepy
-Gesammelte Tweets in geeigneter Struktur speichern
-Export in externe Datei
-
-+Auswertung
-  Anzahl pro Jahr/Monat/Tag (über datetime)
+### Auswertung
++ Anzahl pro Jahr/Monat/Tag (über datetime)
++ Top 10 Hashtags
++ Top X Mentions
++ ...
   
-+Darstellung als Diagramm (matplotlib)
-  Grenzwerte festlegen
-  Geeignete Diagramma auswählen
-    Balken für Tweets pro Monat als Vergleich für beide Accounts
-    ...
+### Darstellung als Diagramm (matplotlib)
++ Grenzwerte festlegen
++ Geeignete Diagramme auswählen:
 
-+Dokumentation (Sphinx, siehe Aufgabenstellung)
 
-+Export (HTML, PDF mit LaTeX)
++ Balken für Tweets pro Monat als Vergleich für beide Accounts 
++ Kreisdiagramm für die Wochentage
++ Säulen für Hashtags OK
 
-+Abgabe: 19.11.2013
+### Dokumentation (Sphinx, siehe Aufgabenstellung)
+
+### Export (HTML, PDF mit LaTeX)
+
+### Neuer Abgabetermin: 27.11.13
 
