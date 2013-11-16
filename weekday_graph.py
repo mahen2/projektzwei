@@ -26,6 +26,6 @@ labels='Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sund
 sizes=days_percent
 colors=['yellowgreen', 'gold', 'lightskyblue', 'lightcoral', 'blue', 'white','red']
 explode=(0, 0, 0, 0, 0, 0, 0) # explode nothing for now
-plt.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
+plt.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True)
 plt.axis('equal')
 plt.show()
