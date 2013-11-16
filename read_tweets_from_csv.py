@@ -29,7 +29,6 @@ def analyse_tweets(csv_file):
     woerter_list1  = []
     mentions_list1 = []
     client_list1   = []
-    
 
     for tweetlist in all_tweets:
         feldindex=0
@@ -46,7 +45,8 @@ def analyse_tweets(csv_file):
                         elif wort.startswith("@"):
                             if(wort.endswith(":")):
                                 wort = wort[:-1] # viele mentions hören mit nem doppelpunkt auf, deshalb entfernen
-                            mentions_list1.append(wort.lower().translate(table, exclude))
+                            if wort.lower() != "@"+csv_file.split("_tweets.csv")[0]: #eigenen namen nicht aufnehmen
+                                mentions_list1.append(wort.lower().translate(table, exclude))
                         else:
                             woerter_list1.append(wort.lower().translate(table, exclude))
             if feldindex == 4:
@@ -159,6 +159,7 @@ def analyse_tweets(csv_file):
     for client in clients1_sorted:
         if client[1]>0:
             print client[0] + ": " + str(client[1]) + " mal"
+    
     
     return(hashtag1_sorted, mentions1_sorted, clients1_sorted, woerter1_sorted, jahre1, monate1, tage1) # return alle dicts
 

@@ -27,8 +27,10 @@ ind = np.arange(N)  # the x locations for the groups
 width = 0.5       # the width of the bars
 
 fig, ax = plt.subplots()
-rects1 = ax.bar(ind, menMeans, width, color='#90ee90')
-
+try:
+    rects1 = ax.bar(ind, menMeans, width, color='#90ee90')
+except AssertionError, e:
+    exit("zu wenige Hashtags, bitte anderen User auswählen")
 plt.subplots_adjust(top=0.85, bottom=0.27)
 # add some
 plt.xticks(rotation=50)
@@ -46,5 +48,11 @@ def autolabel(rects):
                 ha='center', va='bottom')
 
 autolabel(rects1)
-
+dateiname = 'hashtags_'+username+'.png'
+plt.savefig(dateiname)
+try:
+    import grafikupload
+    grafikupload.hochladen_und_twittern(dateiname, username, "Hashtag", h_keys[-1])
+except ImportError, e:
+    pass
 plt.show()

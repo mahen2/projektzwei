@@ -46,5 +46,12 @@ def autolabel(rects):
                 ha='center', va='bottom')
 
 autolabel(rects1)
+dateiname = 'mentions_'+username+'.png'
+plt.savefig(dateiname)
+try:
+    import grafikupload
+    grafikupload.hochladen_und_twittern(dateiname, username, "Mentions", h_keys[-1])
+except ImportError, e:
+    pass
 
 plt.show()
