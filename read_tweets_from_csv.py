@@ -67,10 +67,10 @@ def analyse_tweets(csv_file):
     for d in date_list1: # gehe alle datetime-objekte durch
         tage1[d.weekday()]=''
     
-        monate1[d.strftime("%Y-%m")]='' # dictionary mit monaten (wird evtl mehrmals auf einen leeren string gesetzt, aber das ist egal)
+        monate1[d.strftime("%m")]='' # dictionary mit monaten (wird evtl mehrmals auf einen leeren string gesetzt, aber das ist egal)
         jahre1[d.strftime("%Y")]='' #dictionary mit jahren
         tage1_list.append(d.weekday()) # füge tage zur liste hinzu
-        monate1_list.append(d.strftime("%Y-%m")) # füge monate zur liste hinzu
+        monate1_list.append(d.strftime("%m")) # füge monate zur liste hinzu
         jahre1_list.append(d.strftime("%Y")) #füge jahre zur liste hinzu
         
 
