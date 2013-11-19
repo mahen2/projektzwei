@@ -19,6 +19,23 @@ datei2 = 'dota2rainbow_tweets.csv'
 username1 = datei1.split("_tweets.csv")[0]
 username2 = datei2.split("_tweets.csv")[0]
 
+
+#Ueberprueft ob alle monate vorhanden sind, wenn nicht werden die fehlenden hinzugefuegt.
+#to do: monate sortieren
+
+#def check_months(monate):
+    #for key, value in monate.iteritems():
+        #key = int(key)
+    #print monate
+    #k = 1
+    #while k < 13:
+        #if monate.has_key(k):
+            #print "YEEEESSSSSSSSSSSSSSSS"
+        #else:
+            #print "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
+        #k += 1
+
+
 months_percent1 = []
 months_percent2 = []
 
@@ -35,8 +52,8 @@ calculate_percent(monate2, months_percent2)
 
 
 plt.figure(1)
-labels=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-colors=['yellowgreen', 'gold', 'lightskyblue', 'lightcoral', 'blue', 'white','red', 'yellowgreen', 'gold', 'lightskyblue', 'lightcoral', 'blue']
+labels='January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+colors=['yellowgreen', 'gold', 'lightskyblue', 'lightcoral', 'blue', 'white', 'red', 'yellowgreen', 'gold', 'lightskyblue', 'lightcoral', 'blue']
 
 plt.subplot(121)
 sizes=months_percent1
