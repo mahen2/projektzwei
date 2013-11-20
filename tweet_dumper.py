@@ -12,43 +12,40 @@ access_secret = geheim.access_secret
 
 
 def get_all_tweets(screen_name):
-	#Twitter only allows access to a users most recent 3240 tweets with this method
-	
-	#authorize twitter, initialize tweepy
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_key, access_secret)
 	api = tweepy.API(auth)
 	
-	#initialize a list to hold all the tweepy Tweets
+	# liste für alle tweets
 	alltweets = []	
 	
-	#make initial request for most recent tweets (200 is the maximum allowed count)
+	# anfrage für 200 tweets, das ist das maximum
 	new_tweets = api.user_timeline(screen_name = screen_name,count=200)
 	
-	#save most recent tweets
+	# die letzten 200 tweets in die alltweets liste schreiben
 	alltweets.extend(new_tweets)
 	
-	#save the id of the oldest tweet less one
+	# älteste id speichern, damit danach die nächsten tweets geladen werden können 
 	oldest = alltweets[-1].id - 1
 	
-	#keep grabbing tweets until there are no tweets left to grab
+	# solange tweets speichern bis es keine mehr gibt
 	while len(new_tweets) > 0:
-		print "getting tweets before %s" % (oldest)
+		print "hole tweets vor %s" % (oldest)
 		
-		#all subsiquent requests use the max_id param to prevent duplicates
+		# max_id gibt an, ab welchem tweet die nächsten 200 geladen werden sollen 
 		new_tweets = api.user_timeline(screen_name = screen_name,count=200,max_id=oldest)
 		
-		#save most recent tweets
 		alltweets.extend(new_tweets)
 		
-		#update the id of the oldest tweet less one
 		oldest = alltweets[-1].id - 1
 		
-		print "...%s tweets downloaded so far" % (len(alltweets))
+		print "...%s tweets heruntergeladen" % (len(alltweets))
 	
-	#transform the tweepy tweets into a 2D array that will populate the csv	
-	outtweets = [[tweet.id_str, tweet.created_at, tweet.text.encode("utf-8"), tweet.source.encode("utf-8")] for tweet in alltweets]
-	#write the csv	
+	# schreibe tweets in zweidimensionale liste	
+	outtweets = []
+	for tweet in alltweets:
+		outtweets.append([tweet.id_str, tweet.created_at, tweet.text.encode("utf-8"), tweet.source.encode("utf-8")])
+	# csv datei schreiben
 	with open('%s_tweets.csv' % screen_name, 'wb') as f:
 		writer = csv.writer(f)
 		writer.writerows(outtweets)
@@ -57,7 +54,7 @@ def get_all_tweets(screen_name):
     
 
 if __name__ == '__main__':
-	#pass in the username of the account you want to download
+	# aufforderung zwei user anzugeben, für die die tweets runtergeladen werden sollen
     name_to_get1 = raw_input("Von welchem User sollen die letzten 3200 Tweets abgeholt werden?\nUsername: ")
     get_all_tweets(name_to_get1)
     name_to_get2 = raw_input("Bitte den zweiten User angeben, dessen Tweets gespeichert werden sollen.\nUsername: ")
