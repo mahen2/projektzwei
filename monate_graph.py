@@ -10,8 +10,8 @@ import read_tweets_from_csv, operator
 #datei1 = raw_input("Dateinamen angeben: ")
 #datei2 = raw_input("Dateinamen angeben: ")
 
-datei1 = 'epidota2_tweets.csv'
-datei2 = 'dota2rainbow_tweets.csv'
+datei1 = 'ladygaga_tweets.csv'
+datei2 = 'justinbieber_tweets.csv'
 
 (hashtag1_sorted, mentions1_sorted, clients1_sorted, woerter1_sorted, jahre1, monate1, tage1) = read_tweets_from_csv.analyse_tweets(datei1)
 (hashtag2_sorted, mentions2_sorted, clients2_sorted, woerter2_sorted, jahre2, monate2, tage2) = read_tweets_from_csv.analyse_tweets(datei2)
@@ -42,13 +42,50 @@ months_percent2 = []
 def calculate_percent(monate, months_percent):
     global months_percent1
     global months_percent2
-    months_whole = sum(monate.values())
-    for key, value in monate.iteritems():
-        value_percent = 100 * float(value)/float(months_whole)
+    monate_liste_v=[]
+    for value in monate1_sorted: #an listen anpassen
+        monate_liste_v.append(value[1])
+    months_whole = sum(monate_liste_v)
+    for element in monate:
+        value_percent = 100 * float(element[1])/float(months_whole)
         months_percent.append(value_percent)
 
-calculate_percent(monate1, months_percent1)
-calculate_percent(monate2, months_percent2)
+
+
+
+# fehlende monate werden mit 0 ersetzt (schrecklich programmiert, aber das ist glaub ich am einfachsten):
+
+for i in xrange(12):
+    if i < 9:
+        if '0'+str(i+1) in monate1:
+            pass
+        else:
+            monate1['0'+str(i+1)]=0
+    else:
+        if str(i+1) in monate1:
+            pass
+        else:
+            monate1[str(i+1)]=0
+
+
+for i in xrange(12):
+    if i < 9:
+        if '0'+str(i+1) in monate2:
+            pass
+        else:
+            monate2['0'+str(i+1)]=0
+    else:
+        if str(i+1) in monate2:
+            pass
+        else:
+            monate2[str(i+1)]=0
+
+
+monate1_sorted = sorted(monate1.iteritems(), key=operator.itemgetter(0))
+monate2_sorted = sorted(monate2.iteritems(), key=operator.itemgetter(0))
+
+calculate_percent(monate1_sorted, months_percent1)
+calculate_percent(monate2_sorted, months_percent2)
 
 
 plt.figure(1)
