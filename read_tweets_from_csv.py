@@ -62,7 +62,7 @@ def analyse_tweets(csv_file):
     monate1_list = []
     jahre1_list = []
 
-    print "\n\n--- Datumsanalyse der Tweets  ---\n\n"
+    print "\n\n--- Analyse der Tweets  ---\n\n"
 
     for d in date_list1: # gehe alle datetime-objekte durch
         tage1[d.weekday()]=''
@@ -85,32 +85,53 @@ def analyse_tweets(csv_file):
         tage1[t] = tage1_list.count(t) # vgl jahre
     
     print "\n"
-
-    for key in jahre1:
-        print "Im Jahr " + str(key) + ": " + str(jahre1[key]) + " Tweets"
-
-    print "\n"
-
-    for key in monate1:
-        print "Im Monat " + str(key) + ": " + str(monate1[key]) + " Tweets"
     
-    print "\n"
+    print "Jahres-Analyse"
+    print "==============\n"
+    print "==================== ===================="
+    print "Jahr\t\t\t\t\tTweets"
+    print "==================== ===================="
+    for key in jahre1:
+        print str(key)+ "\t\t\t\t\t" + str(jahre1[key])
+    print "==================== ===================="
+    print "\n\n"
+    
+    monate1_sorted = sorted(monate1.iteritems(), key=operator.itemgetter(1))
 
+    print "Monats-Analyse"
+    print "==============\n"
+    print "==================== ===================="
+    print "Monate\t\t\t\t\tTweets"
+    print "==================== ===================="
+    for monat in monate1_sorted:
+        print monat[0] + "\t\t\t\t\t" + str(monat[1])
+    print "==================== ===================="
+    print "\n\n"
+
+    print "Wochentags-Analyse"
+    print "==================\n"
+    print "==================== ===================="
+    print "Wochentage\t\t\t\t\tTweets"
+    print "==================== ===================="
     for key in tage1:
         if key==0:
-            print "montags: "  + str(tage1[key]) + " Tweets"
+            print "montags\t\t\t\t\t"  + str(tage1[key])
         if key==1:
-            print "dienstags: "  + str(tage1[key]) + " Tweets"
+            print "dienstags\t\t\t\t\t"  + str(tage1[key]) 
         if key==2:
-            print "mittwochs: "  + str(tage1[key]) + " Tweets"
+            print "mittwochs\t\t\t\t\t"  + str(tage1[key])
         if key==3:
-            print "donnerstags: "  + str(tage1[key]) + " Tweets"
+            print "donnerstags\t\t\t\t\t"  + str(tage1[key]) 
         if key==4:
-            print "freitags: "  + str(tage1[key]) + " Tweets"
+            print "freitags\t\t\t\t\t"  + str(tage1[key])
         if key==5:
-            print "samstags: "  + str(tage1[key]) + " Tweets"
+            print "samstags\t\t\t\t\t"  + str(tage1[key])
         if key==6:
-            print "sonntags: "  + str(tage1[key]) + " Tweets"
+            print "sonntags\t\t\t\t\t"  + str(tage1[key])
+    print "==================== ===================="
+    print "\n\n"
+
+    print "\nWörter werden gezählt, bitte warten ...\n"
 
     hashtag1 = {}
     for hashtag in hashtag_list1:
@@ -133,32 +154,50 @@ def analyse_tweets(csv_file):
     hashtag1_sorted = sorted(hashtag1.iteritems(), key=operator.itemgetter(1))
     mentions1_sorted = sorted(mentions1.iteritems(), key=operator.itemgetter(1))
     clients1_sorted = sorted(clients1.iteritems(), key=operator.itemgetter(1))
-    print "\n\n--- Hashtaganalyse der Tweets (Schwelle: mindestens 10 mal verwendet)  ---\n\n"
 
-
+    print "Hashtag-Analyse"
+    print "===============\n"
+    print "========================= ===================="
+    print "Hashtags\t\t\t\t\t\tAnzahl"
+    print "========================= ===================="
     for tup in hashtag1_sorted:
         if tup[1]>10:
-            print tup[0] + ": " + str(tup[1]) + " mal"
-    
-    print "\n\n--- Wörteranalyse der Tweets (Schwelle: mindestens 10 mal verwendet)  ---\n\n"
-    
-            
+            print tup[0] + "\t\t\t\t\t\t" + str(tup[1])
+    print "========================= ===================="
+    print "\n\n"
+
+    print "Wörter-Analyse"
+    print "==============\n"
+    print "==================== ===================="
+    print "Wörter\t\t\t\t\tAnzahl"
+    print "==================== ===================="        
     for wor in woerter1_sorted:
         if wor[1]>10:
-            print wor[0] + ": " + str(wor[1]) + " mal"
+            print wor[0] + "\t\t\t\t\t" + str(wor[1])
+    print "==================== ===================="
+    print "\n\n"
             
-            
-    print "\n\n--- Mentionsanalyse der Tweets (Schwelle: mindestens 10 mal verwendet)  ---\n\n"
-    
+    print "Mentions-Analyse"
+    print "================\n"        
+    print "==================== ===================="
+    print "Mentions\t\t\t\t\tAnzahl"
+    print "==================== ===================="        
     for mention in mentions1_sorted:
         if mention[1]>10:
-            print mention[0] + ": " + str(mention[1]) + " mal"
-            
-    print "\n\n--- Clientanalyse der Tweets (Schwelle: mindestens 10 mal verwendet)  ---\n\n"
+            print mention[0] + "\t\t\t\t\t" + str(mention[1])
+    print "==================== ===================="
+    print "\n\n"
 
+    print "Clients-Analyse"
+    print "===============\n"            
+    print "==================== ===================="
+    print "Clients\t\t\t\t\tAnzahl"
+    print "==================== ===================="        
     for client in clients1_sorted:
         if client[1]>0:
-            print client[0] + ": " + str(client[1]) + " mal"
+            print client[0] + "\t\t\t\t\t" + str(client[1]) 
+    print "==================== ===================="
+    print "\n\n"
     
     
     return(hashtag1_sorted, mentions1_sorted, clients1_sorted, woerter1_sorted, jahre1, monate1, tage1) # return alle dicts
