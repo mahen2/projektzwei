@@ -54,8 +54,6 @@ sonntags					405
 
 
 
-Wörter werden gezählt, bitte warten ...
-
 Hashtag-Analyse
 ===============
 

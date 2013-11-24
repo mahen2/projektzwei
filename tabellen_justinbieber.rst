@@ -49,8 +49,6 @@ sonntags					378
 
 
 
-Wörter werden gezählt, bitte warten ...
-
 Hashtag-Analyse
 ===============
 
