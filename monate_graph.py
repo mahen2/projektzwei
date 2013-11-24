@@ -10,7 +10,7 @@ import read_tweets_from_csv, operator
 #datei1 = raw_input("Dateinamen angeben: ")
 #datei2 = raw_input("Dateinamen angeben: ")
 
-datei1 = 'ladygaga_tweets.csv'
+datei1 = 'mileycyrus_tweets.csv'
 datei2 = 'justinbieber_tweets.csv'
 
 (hashtag1_sorted, mentions1_sorted, clients1_sorted, woerter1_sorted, jahre1, monate1, tage1) = read_tweets_from_csv.analyse_tweets(datei1)
