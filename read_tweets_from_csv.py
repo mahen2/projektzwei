@@ -156,6 +156,8 @@ def analyse_tweets(csv_file):
     hashtag1_sorted = sorted(hashtag1.iteritems(), key=operator.itemgetter(1))
     mentions1_sorted = sorted(mentions1.iteritems(), key=operator.itemgetter(1))
     clients1_sorted = sorted(clients1.iteritems(), key=operator.itemgetter(1))
+    
+    #ausgabe der ergebnisse 2
 
     print "Hashtag-Analyse"
     print "===============\n"
@@ -201,6 +203,7 @@ def analyse_tweets(csv_file):
     print "==================== ===================="
     print "\n\n"
     
+    #returnen der ergebnisse, damit diese in den anderen dateien genutzt werden können
     
     return(hashtag1_sorted, mentions1_sorted, clients1_sorted, woerter1_sorted, jahre1, monate1, tage1) # return alle dicts
 
