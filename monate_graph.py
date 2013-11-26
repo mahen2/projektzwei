@@ -7,11 +7,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import read_tweets_from_csv, operator
 
-#datei1 = raw_input("Dateinamen angeben: ")
-#datei2 = raw_input("Dateinamen angeben: ")
+datei1 = raw_input("Dateinamen angeben für den ersten User: ")
+datei2 = raw_input("Dateinamen angeben für den zweiten User: ")
 
-datei1 = 'mileycyrus_tweets.csv'
-datei2 = 'justinbieber_tweets.csv'
 
 (hashtag1_sorted, mentions1_sorted, clients1_sorted, woerter1_sorted, jahre1, monate1, tage1) = read_tweets_from_csv.analyse_tweets(datei1)
 (hashtag2_sorted, mentions2_sorted, clients2_sorted, woerter2_sorted, jahre2, monate2, tage2) = read_tweets_from_csv.analyse_tweets(datei2)
@@ -19,21 +17,6 @@ datei2 = 'justinbieber_tweets.csv'
 username1 = datei1.split("_tweets.csv")[0]
 username2 = datei2.split("_tweets.csv")[0]
 
-
-#Ueberprueft ob alle monate vorhanden sind, wenn nicht werden die fehlenden hinzugefuegt.
-#to do: monate sortieren
-
-#def check_months(monate):
-    #for key, value in monate.iteritems():
-        #key = int(key)
-    #print monate
-    #k = 1
-    #while k < 13:
-        #if monate.has_key(k):
-            #print "YEEEESSSSSSSSSSSSSSSS"
-        #else:
-            #print "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
-        #k += 1
 
 
 months_percent1 = []
@@ -53,7 +36,7 @@ def calculate_percent(monate, months_percent):
 
 
 
-# fehlende monate werden mit 0 ersetzt (schrecklich programmiert, aber das ist glaub ich am einfachsten):
+# fehlende monate werden mit 0 ersetzt:
 
 for i in xrange(12):
     if i < 9:
@@ -104,6 +87,17 @@ sizes=months_percent2
 plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True)
 plt.title('Tweets per Month: '+username2)
 plt.axis('equal')
+
+username = datei1.split("_tweets.csv")[0] + "_" + datei2.split("_tweets.csv")[0]
+
+dateiname = 'monate_'+username+'.png'
+plt.savefig(dateiname)
+try:
+    import grafikupload
+    grafikupload.hochladen_und_twittern(dateiname, username, "Monate", "Diese Monate sind")
+except ImportError:
+    print "grafikupload.py nicht gefunden"
+
 
 plt.show()
 

@@ -56,5 +56,4 @@ try:
 except ImportError:
     print "grafikupload.py nicht gefunden"
 
-    pass
 plt.show()

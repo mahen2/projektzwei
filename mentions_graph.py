@@ -51,7 +51,7 @@ plt.savefig(dateiname)
 try:
     import grafikupload
     grafikupload.hochladen_und_twittern(dateiname, username, "Mentions", h_keys[-1])
-except ImportError, e:
-    pass
+except ImportError:
+    print "grafikupload.py nicht gefunden"
 
 plt.show()
