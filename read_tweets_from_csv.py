@@ -11,10 +11,10 @@ exclude = "?!-.,;" # satzzeichen die weggefiltert werden sollen
 table = string.maketrans("","")
 
 if __name__ == "__main__":
-    csv_file = raw_input("Welche Datei soll geöffnet werden?\nDateiname: ")
+    csv_file = raw_input("Welche Datei soll geöffnet werden?\nDateiname: ")  #fragt den benutzer nach der datei, welche ausgelesen werden soll
         
         
-# all_tweets ist ne liste mit allen tweets, die gerade eingelesen wurden 
+# erstellen von all_tweets. all_tweets ist eine liste mit allen tweets, die gerade eingelesen wurden
 def analyse_tweets(csv_file):
     all_tweets = []
     with open(csv_file, 'rb') as csvfile:
@@ -24,13 +24,13 @@ def analyse_tweets(csv_file):
     
     date_format = "%Y-%m-%d %H:%M:%S"
     
-    date_list1     = []
+    date_list1     = []  #erstellt listen, welche später gefüllt und weiter bearbeitet werden
     hashtag_list1  = []
     woerter_list1  = []
     mentions_list1 = []
     client_list1   = []
 
-    for tweetlist in all_tweets:
+    for tweetlist in all_tweets: #geht die tweets durch und filtert stoppworte heraus, sortiert hashtags, mentions, usw in die entsprechenden listen
         feldindex=0
         for feld in tweetlist:
             feldindex+=1
@@ -84,7 +84,9 @@ def analyse_tweets(csv_file):
     for t in tage1:
         tage1[t] = tage1_list.count(t) # vgl jahre
     
-    print "\n"
+    print "\n"  
+    
+    # ausgabe der ergebnisse
     
     print "Jahres-Analyse"
     print "==============\n"
@@ -150,7 +152,7 @@ def analyse_tweets(csv_file):
     for client in client_list1:
         clients1[unicode(client, "utf8")] = client_list1.count(client)
     
-    woerter1_sorted = sorted(woerter1.iteritems(), key=operator.itemgetter(1))
+    woerter1_sorted = sorted(woerter1.iteritems(), key=operator.itemgetter(1))   #woerter, hashtags, mentions und clients sortieren
     hashtag1_sorted = sorted(hashtag1.iteritems(), key=operator.itemgetter(1))
     mentions1_sorted = sorted(mentions1.iteritems(), key=operator.itemgetter(1))
     clients1_sorted = sorted(clients1.iteritems(), key=operator.itemgetter(1))
