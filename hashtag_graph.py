@@ -53,6 +53,8 @@ plt.savefig(dateiname)
 try:
     import grafikupload
     grafikupload.hochladen_und_twittern(dateiname, username, "Hashtag", h_keys[-1])
-except ImportError, e:
+except ImportError:
+    print "grafikupload.py nicht gefunden"
+
     pass
 plt.show()

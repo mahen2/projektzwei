@@ -1,32 +1,43 @@
 # encoding: utf-8
 # quelle: http://stackoverflow.com/questions/432385/sftp-in-python-platform-independent
-import paramiko, geheim, tweepy
-consumer_key = geheim.consumer_key
-consumer_secret = geheim.consumer_secret
-access_key = geheim.access_key
-access_secret = geheim.access_secret
-
-
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_key, access_secret)
-api = tweepy.API(auth)
+try:
+    import paramiko, geheim, tweepy, sys
+    import_successful = True
+except ImportError:
+    print "Das Modul paramiko muss für den grafikupload installiert sein."
+    import_successful = False
 
 
 def hochladen_und_twittern(dateiname, username, typ, topwert=None):
+    if import_successful == False:
+        return 0
+    consumer_key = geheim.consumer_key
+    consumer_secret = geheim.consumer_secret
+    access_key = geheim.access_key
+    access_secret = geheim.access_secret
+
+
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_key, access_secret)
+    api = tweepy.API(auth)
+    
     print "lade " + dateiname + " hoch" 
     host = "columba.uberspace.de"                    
     port = 22
     transport = paramiko.Transport((host, port))
 
     password_sftp = geheim.password_sftp             
-    username_sftp = geheim.username_sftp             
-    transport.connect(username = username_sftp, password = password_sftp)
-
+    username_sftp = geheim.username_sftp
+    try:             
+        transport.connect(username = username_sftp, password = password_sftp)
+    except paramiko.AuthenticationException:
+        print "Fehler bei FTP-Anmeldung"
+        return 0
     sftp = paramiko.SFTPClient.from_transport(transport)
 
-    import sys
     path = './html/' + dateiname   
     localpath = dateiname
+    
     sftp.put(localpath, path)
 
     sftp.close()
